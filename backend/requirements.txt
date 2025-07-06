@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+PyMuPDF==1.23.9
+firebase-admin
+supabase
+sqlalchemy
+llama-index
+together
