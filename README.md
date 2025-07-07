@@ -4,21 +4,20 @@ QueriDoc is a full-stack AI-powered PDF Q&A assistant. Users can upload PDFs, as
 
 ---
 
-##  Features
+## Features
 
--  User authentication with Firebase
--  Upload and store PDFs using Supabase Storage.
--  Only those pdf's uploaded by that user is shown when they log in to their account.
--  Ask questions about uploaded files (chat-style Q&A)
--  Uses Together AI's Mixtral model + embedding for semantic search. Used llama-index LLM 
-
+- User authentication with Firebase
+- Upload and store PDFs using Supabase Storage.
+- Only those pdf's uploaded by that user is shown when they log in to their account.
+- Ask questions about uploaded files (chat-style Q&A)
+- Uses Together AI's Mixtral model + embedding for semantic search. Used llama-index LLM
 
 ---
 
-# 📁 Project Structure – DocuQuery
+# 📁 Project Structure – QueriDoc
 
 ```bash
-DocuQuery/
+QueriDoc/
 ├── backend/
 │   ├── main.py                      # FastAPI backend
 │   ├── .env                         # Environment variables
@@ -46,6 +45,7 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1  # This Works only in Windows Power shell
 pip install -r requirements.txt
 ```
+
 ### 2. Create `.env` in `/backend`
 
 Create a `.env` file in the `/backend` directory with the following content:
@@ -57,6 +57,7 @@ SUPABASE_SERVICE_KEY=your_service_role_key
 SUPABASE_BUCKET=pdfs
 DATABASE_URL=postgresql://username:password@host:port/dbname
 ```
+
 ### 3. Run Backend
 
 Start the backend server using the following command:
@@ -64,6 +65,7 @@ Start the backend server using the following command:
 ```bash
 uvicorn main:app --reload
 ```
+
 ## 🖥️ Frontend Setup (React + Vite)
 
 ### 1. Install Dependencies
@@ -72,6 +74,7 @@ uvicorn main:app --reload
 cd frontend
 npm install
 ```
+
 ### 2. Configure `firebase.js`
 
 Edit the Firebase configuration in `src/firebase.js`:
@@ -91,36 +94,28 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 ```
+
 ### 3. Run frontend
+
 ```bash
 npm run dev
 ```
+
 ## 📡 API Endpoints
 
-| Method | Endpoint        | Description                          |
-|--------|------------------|--------------------------------------|
-| POST   | `/upload`        | Upload a PDF and extract its text    |
-| POST   | `/ask`           | Ask a question based on the PDF      |
-| GET    | `/my-files`      | List uploaded files by the user      |
-| GET    | `/qna-history`   | Fetch Q&A history for a specific PDF |
+| Method | Endpoint       | Description                          |
+| ------ | -------------- | ------------------------------------ |
+| POST   | `/upload`      | Upload a PDF and extract its text    |
+| POST   | `/ask`         | Ask a question based on the PDF      |
+| GET    | `/my-files`    | List uploaded files by the user      |
+| GET    | `/qna-history` | Fetch Q&A history for a specific PDF |
 
 ## 🧠 Architecture Overview
 
-| Layer     | Technology                     | Purpose                                              |
-|-----------|--------------------------------|------------------------------------------------------|
-| Frontend  | React + Vite                   | UI, auth (Firebase), file upload, chat |
-| Backend   | FastAPI (Python)               | API for upload, Q&A, history, text extraction       |
-| Storage   | Supabase (Bucket)              | Stores PDFs and extracted text                      |
-| Database  | PostgreSQL (via SQLAlchemy)    | Stores metadata and Q&A history                     |
-| AI        | Together AI (Mixtral, M2-BERT) | PDF Q&A via LLM (llama-index) + embedding-based retrieval         |
-
-
-
-
-
-
-
-
-
-
-
+| Layer    | Technology                     | Purpose                                                   |
+| -------- | ------------------------------ | --------------------------------------------------------- |
+| Frontend | React + Vite                   | UI, auth (Firebase), file upload, chat                    |
+| Backend  | FastAPI (Python)               | API for upload, Q&A, history, text extraction             |
+| Storage  | Supabase (Bucket)              | Stores PDFs and extracted text                            |
+| Database | PostgreSQL (via SQLAlchemy)    | Stores metadata and Q&A history                           |
+| AI       | Together AI (Mixtral, M2-BERT) | PDF Q&A via LLM (llama-index) + embedding-based retrieval |
