@@ -32,7 +32,7 @@ firebase_dict = json.loads(firebase_json)
 firebase_dict["private_key"] = firebase_dict["private_key"].replace("\\n", "\n")
 
 # Now load credentials
-cred = credentials.Certificate("firebase_credentials.json")
+cred = credentials.Certificate(firebase_dict)
 firebase_admin.initialize_app(cred)
 
 async def verify_firebase_token(request: Request):
